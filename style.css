@@ -130,13 +130,6 @@ p.pencil {
         min-height: 400px;
     }
 
-    .tile {
-        font-size: minmax(1em, 1em);
-    }
-    p.pencil {
-        font-size: 2.8vmin;
-    }
-
     
     @media screen and (orientation: portrait) {
         p.pencil {
