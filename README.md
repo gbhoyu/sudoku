@@ -1,1 +1,1 @@
-# hoyuelosgabriel.github.io
+# hoyu.github.io
