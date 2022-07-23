@@ -197,6 +197,14 @@ function settings(event) {
                 element.classList.remove("editable")
                 board.set_state(x, y, element.textContent, "static")
                 completion = true
+
+                let a = document.getElementById("^"+i)
+                for (const child of a.children) {
+                    child.innerHTML = ""
+                }
+                for (let j = 0; j < 9; j++) {
+                    board.set_anotation(x, y, j, false)
+                }
             }
             list.style.display = ""
             arrow.classList.add("arrow-down")
@@ -301,8 +309,6 @@ window.put_number = function (number) {
         for (const child of a.children) {
             child.innerHTML = ""
         }
-
-
         for (let j = 0; j < 9; j++) {
             board.set_anotation(x, y, j, false)
         }
