@@ -33,6 +33,7 @@ for (const tr of board_table.firstElementChild.children) {
         button.id = count.toString()
         button.className = "tile"
         let p = document.createElement("p")
+        p.className = "anotations"
         p.id = "^" + count
         p.textContent = "   \n   \n   "
         td.appendChild(p)
