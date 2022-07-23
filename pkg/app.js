@@ -21,6 +21,10 @@ document.addEventListener("click", e => {
 document.getElementById("back_modal").addEventListener("click", e => {
     document.getElementById("modal").style.display = "none"
 })
+document.getElementById("play_again_modal").addEventListener("click", e => {
+    document.getElementById("modal").style.display = "none"
+    settings({ srcElement: document.getElementById("new_puzzle"), stopPropagation: () => { } })
+})
 document.getElementById("settings").addEventListener("click", settings)
 document.getElementById("pencil").addEventListener("click", toggle_pencil)
 
@@ -62,8 +66,7 @@ let board_hard = Board.hard()
 
 let board = board_easy
 bind_board(board)
-
-document.getElementById("blank").style.display = "none"
+document.getElementById("loadOverlay").style.display = "none"
 
 
 
@@ -182,19 +185,25 @@ function settings(event) {
             arrow.classList.remove("arrow-up")
             break;
         case "Reveal puzzle":
+            let completion = false
             for (let i = 0; i < 81; i++) {
                 let element = document.getElementById(i)
-                if (!element || !element.classList.contains("editable")) { continue; }
+                if (!element || !element.classList.contains("editable") ||
+                    element.classList.contains("static")) { continue; }
                 let x = i % 9
                 let y = Math.floor(i / 9)
                 element.textContent = board.get_value_solution(x, y);
                 element.classList.add("static")
                 element.classList.remove("editable")
                 board.set_state(x, y, element.textContent, "static")
+                completion = true
             }
             list.style.display = ""
             arrow.classList.add("arrow-down")
             arrow.classList.remove("arrow-up")
+            if (completion) {
+                win()
+            }
             break;
         case "Check errors":
             for (let i = 0; i < 81; i++) {
@@ -297,26 +306,28 @@ window.put_number = function (number) {
             board.set_anotation(x, y, j, false)
         }
         selected_tile.textContent = number
+        selected_tile.classList.remove("selected")
+
         board.set_state(x, y, number, "normal")
         if (board.is_finished()) {
-            requestIdleCallback(() => {
-                let audio = document.getElementById("victory_sound")
-                audio.volume = 0.9
-                audio.play();
-
-
-                selected_tile.classList.remove("selected")
-                selected_tile = null
-                settings({ srcElement: document.getElementById("check_errors"), stopPropagation: () => { } })
-                document.getElementById("modal").style.display = "flex"
-            })
+            win()
         }
 
     }
     selected_tile.classList.remove("error")
     selected_tile.classList.remove("shake")
+    selected_tile = null
 }
 
 
+function win() {
+    requestIdleCallback(() => {
+        let audio = document.getElementById("victory_sound")
+        audio.volume = 0.9
+        audio.play();
+        settings({ srcElement: document.getElementById("check_errors"), stopPropagation: () => { } })
+        document.getElementById("modal").style.display = "flex"
+    })
+}
 
 //----------------------------------------------------------------

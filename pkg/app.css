@@ -15,6 +15,19 @@
     --font-size-big: 2.5rem;
 }
 
+#loadOverlay {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    line-height: 100vh;
+    font-family: sans-serif;
+    font-size: 2rem
+}
+
 
 html {
     width: 100%;
@@ -23,16 +36,6 @@ html {
     touch-action: pan-y;
 }
 
-.blank {
-    width: 100vw;
-    height: 100vh;
-    background-color: white;
-    position: absolute;
-    z-index: 3;
-    font-size: var(--font-size);
-    font-family: sans-serif;
-    line-height: 100vh;
-}
 
 body {
     display: flex;
@@ -364,13 +367,3 @@ ul {
 
 
 
-/*
-------------------------------------------------------------------CONFETI
-*/
-.confetti {
-    max-width: 640px;
-    display: block;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    user-select: none;
-}
