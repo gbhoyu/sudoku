@@ -185,7 +185,6 @@ function settings(event) {
             arrow.classList.remove("arrow-up")
             break;
         case "Reveal puzzle":
-            let completion = false
             for (let i = 0; i < 81; i++) {
                 let element = document.getElementById(i)
                 if (!element || !element.classList.contains("editable") ||
@@ -196,9 +195,8 @@ function settings(event) {
                 element.classList.add("static")
                 element.classList.remove("editable")
                 board.set_state(x, y, element.textContent, "static")
-                completion = true
 
-                let a = document.getElementById("^"+i)
+                let a = document.getElementById("^" + i)
                 for (const child of a.children) {
                     child.innerHTML = ""
                 }
@@ -209,9 +207,6 @@ function settings(event) {
             list.style.display = ""
             arrow.classList.add("arrow-down")
             arrow.classList.remove("arrow-up")
-            if (completion) {
-                win()
-            }
             break;
         case "Check errors":
             for (let i = 0; i < 81; i++) {
@@ -305,35 +300,35 @@ window.put_number = function (number) {
         selected_tile.classList.remove("shake")
     } else {
         let a = document.getElementById("^" + selected_tile.id)
-
         for (const child of a.children) {
             child.innerHTML = ""
         }
         for (let j = 0; j < 9; j++) {
             board.set_anotation(x, y, j, false)
         }
+
         selected_tile.textContent = number
-        selected_tile.classList.remove("selected")
         selected_tile.classList.remove("error")
         selected_tile.classList.remove("shake")
-        selected_tile = null
+        
         board.set_state(x, y, number, "normal")
+        
         if (board.is_finished()) {
-            win()
+            selected_tile.classList.remove("selected")
+            selected_tile = null
+            requestIdleCallback(() => {
+                let audio = document.getElementById("victory_sound")
+                audio.volume = 0.9
+                audio.play();
+                settings({ srcElement: document.getElementById("check_errors"), stopPropagation: () => { } })
+                document.getElementById("modal").style.display = "flex"
+            })
         }
 
     }
 }
 
 
-function win() {
-    requestIdleCallback(() => {
-        let audio = document.getElementById("victory_sound")
-        audio.volume = 0.9
-        audio.play();
-        settings({ srcElement: document.getElementById("check_errors"), stopPropagation: () => { } })
-        document.getElementById("modal").style.display = "flex"
-    })
-}
+
 
 //----------------------------------------------------------------

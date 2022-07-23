@@ -18,14 +18,13 @@ impl Tile {
             Tile::Normal(val) => format!("normal {val}"),
             Tile::Static(val) => format!("static {val}"),
             Tile::Error(val) => format!("error {val}"),
-            _ => String::from(""),
         }
     }
-    pub fn get_value(&self) -> u8 {
+    pub fn get_value(&self) -> &u8 {
         match self {
-            Tile::Normal(val) => *val,
-            Tile::Static(val) => *val,
-            Tile::Error(val) => *val,
+            Tile::Normal(val) => val,
+            Tile::Static(val) => val,
+            Tile::Error(val) => val,
         }
     }
 }
@@ -326,7 +325,7 @@ impl Board {
             "static" => self.state[y][x] = Tile::Static(val),
             "error" => self.state[y][x] = Tile::Error(val),
             _ => log("ATENCION EL CAMBIO DE STATE NO ENTRO UN TILE VALIDO"),
-        }
+        };
     }
 
     pub fn get_state(&mut self, x: usize, y: usize) -> String {
@@ -334,7 +333,7 @@ impl Board {
     }
 
     pub fn set_anotation(&mut self, x: usize, y: usize, number: usize, val: bool) {
-        self.anotations[y][x][number] = val
+        self.anotations[y][x][number] = val;
     }
 
     pub fn get_anotation(&mut self, x: usize, y: usize, number: usize) -> bool {
@@ -346,12 +345,12 @@ impl Board {
 
         for y in 0..9 {
             for x in 0..9 {
-                let val = self.state[y][x].get_value();
-                if val == 0 {
-                    //for testing
-                    return false;
+                if self.values[y][x] != 0 {
+                    continue;
                 }
-                if solution[y][x] != val {
+                
+                let val = self.state[y][x].get_value();
+                if solution[y][x] != *val {
                     return false;
                 }
             }
