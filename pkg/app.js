@@ -293,7 +293,8 @@ window.put_number = function (number) {
             board.set_anotation(x, y, number - 1, false)
         }
         board.set_state(x, y, 0, "normal")
-
+        selected_tile.classList.remove("error")
+        selected_tile.classList.remove("shake")
     } else {
         let a = document.getElementById("^" + selected_tile.id)
 
@@ -307,16 +308,15 @@ window.put_number = function (number) {
         }
         selected_tile.textContent = number
         selected_tile.classList.remove("selected")
-
+        selected_tile.classList.remove("error")
+        selected_tile.classList.remove("shake")
+        selected_tile = null
         board.set_state(x, y, number, "normal")
         if (board.is_finished()) {
             win()
         }
 
     }
-    selected_tile.classList.remove("error")
-    selected_tile.classList.remove("shake")
-    selected_tile = null
 }
 
 
