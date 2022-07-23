@@ -32,7 +32,7 @@ for (const tr of board_table.firstElementChild.children) {
         button.addEventListener("click", select_tile)
         button.id = count.toString()
         button.className = "tile"
-        let p = document.createElement("pre")
+        let p = document.createElement("p")
         p.id = "^" + count
         p.textContent = "   \n   \n   "
         td.appendChild(p)
