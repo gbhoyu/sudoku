@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content=' initial-scale=0.7, width=500' />
+
+    <link rel="stylesheet" href="app.css">
+    <title>Sudoku</title>
+</head>
+
+<h1 class="options">
+    <button id="easy_mode">Easy</button>
+    <button id="hard_mode">Hard</button>
+    <div class="space_w"></div>
+
+    <button id="settings" class="dropdown">Settings
+        <div id="settings_list" class="dropdown-list">
+            <ul>
+                <li>New puzzle</li>
+                <li>Reveal puzzle</li>
+                <li id="check_errors">Check errors</li>
+            </ul>
+        </div>
+    </button>
+    <div class="space1">
+        <div id="arrow" class="arrow-down"></div>
+    </div>
+</h1>
+
+
+<body>
+
+    <div id="blank" class="blank"> Loading... </div>
+    <script src="app.js" type="module"></script>
+    <div class="space_h"></div>
+
+
+
+    <table id="board_table">
+        <tbody>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+            <tr>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+                <td><Button>.</Button></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="space_h"></div>
+
+    <div class="number_bar">
+
+        <button id="pencil" class="pencil">
+            <img src="https://icons.iconarchive.com/icons/iconsmind/outline/48/Pencil-icon.png" alt="">
+        </button>
+        <div>
+            <div class="numbers">
+                <button onclick="put_number('1')">1</button>
+                <button onclick="put_number('2')">2</button>
+                <button onclick="put_number('3')">3</button>
+                <button onclick="put_number('4')">4</button>
+                <button onclick="put_number('5')">5</button>
+
+            </div>
+            <div class="numbers">
+                <button onclick="put_number('6')">6</button>
+                <button onclick="put_number('7')">7</button>
+                <button onclick="put_number('8')">8</button>
+                <button onclick="put_number('9')">9</button>
+                <button onclick="put_number(' ')">&times;</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="space_h"></div>
+
+
+
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p>You WIN!</p>
+            <button id="back_modal" class="back">Back</button>
+        </div>
+    </div>
+
+</body>
+
+
+
+</html>
