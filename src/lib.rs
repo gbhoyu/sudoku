@@ -349,7 +349,7 @@ impl Board {
                 let val = self.state[y][x].get_value();
                 if val == 0 {
                     //for testing
-                    return true;
+                    return false;
                 }
                 if solution[y][x] != val {
                     return false;

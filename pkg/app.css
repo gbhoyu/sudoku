@@ -19,8 +19,8 @@
 html {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     touch-action: pan-y;
-
 }
 
 .blank {
@@ -56,6 +56,7 @@ h1 {
     border: 0;
     background-color: var(--ligth-gray);
 
+
     font-variant-numeric: tabular-nums;
     font-weight: bold;
 
@@ -65,25 +66,31 @@ h1 {
     position: relative;
 }
 
-.anotations {
-    color: var(--blue);
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    transform: translate(2px, -68px);
 
-    font-family: monospace, serif;
-    font-size: var(--font-size-super-small);
-    
+
+.anotations {
+    position: absolute;
+    width: 50px;
+    height: 49px;
+    transform: translate(0px, -53px);
+
+    color: var(--blue);
+    font-size: 1.3rem;
     font-weight: bold;
+    font-family: sans-serif;
     text-align: center;
 
-    letter-spacing: 0.25em;
-    line-height: 0.88em;
-    z-index: 1;
-    pointer-events: none;
 
+    display: grid;
+    grid-template-columns: 16.66px 16.67px 16.66px;
+    pointer-events: none;
 }
+
+.anotations>* {
+    width: 16.66px;
+    height: 16.66px;
+}
+
 
 table {
     margin: 10px;
@@ -260,6 +267,8 @@ ul {
 
 
 
+
+
 .modal {
 
     display: none;
@@ -272,25 +281,44 @@ ul {
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
 /* Modal Content/Box */
 .modal-content {
     font-family: sans-serif;
     background-color: #fefefe;
-    margin: auto;
 
+    margin: auto;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 
     border-radius: 15px;
     font-size: var(--font-size-big);
     padding: 25px;
     width: 70%;
     box-shadow: -4px -3px 25px 11px rgba(0, 0, 0, 0.15);
+
+    animation: pop 0.2s ease-in-out;
 }
+
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5)
+    }
+
+    70% {
+        transform: scale(1.2)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+
+
 
 .back {
     margin: 10px;
@@ -331,4 +359,18 @@ ul {
     width: 14px;
     margin: 0px;
     border: 0;
+}
+
+
+
+
+/*
+------------------------------------------------------------------CONFETI
+*/
+.confetti {
+    max-width: 640px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    user-select: none;
 }

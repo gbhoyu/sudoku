@@ -14,6 +14,8 @@ document.getElementById("hard_mode").addEventListener("click", select_mode)
 document.addEventListener("click", e => {
     if (document.getElementById("settings").firstElementChild.style.display != "") {
         document.getElementById("settings").firstElementChild.style.display = ""
+        arrow.classList.add("arrow-down")
+        arrow.classList.remove("arrow-up")
     }
 });
 document.getElementById("back_modal").addEventListener("click", e => {
@@ -21,6 +23,7 @@ document.getElementById("back_modal").addEventListener("click", e => {
 })
 document.getElementById("settings").addEventListener("click", settings)
 document.getElementById("pencil").addEventListener("click", toggle_pencil)
+
 
 
 
@@ -32,11 +35,22 @@ for (const tr of board_table.firstElementChild.children) {
         button.addEventListener("click", select_tile)
         button.id = count.toString()
         button.className = "tile"
-        let p = document.createElement("p")
-        p.className = "anotations"
-        p.id = "^" + count
-        p.textContent = "   \n   \n   "
-        td.appendChild(p)
+
+        let a = document.createElement("div")
+        a.className = "anotations"
+        a.id = "^" + count
+
+        requestIdleCallback(() => {
+
+            for (let i = 0; i < 9; i++) {
+                let num = document.createElement("div")
+                num.textContent = ""
+                a.append(num)
+            }
+
+        })
+
+        td.append(a)
 
         count++;
     }
@@ -80,17 +94,21 @@ function bind_board(board) {
             element.className = "tile"
         }
 
-        let s = "   \n   \n   "
-        let pre = document.getElementById("^" + i)
+
+        let a = document.getElementById("^" + i)
+        for (const child of a.children) {
+            child.innerHTML = ""
+        }
 
         for (let j = 0; j < 9; j++) {
-            let index = j + Math.floor(j / 3)
+
             if (board.get_anotation(x, y, j)) {
-                s = s.substring(0, index) + (j + 1) + s.substring(index + 1)
+                a.children[j].innerHTML = j + 1
+
             }
 
         }
-        pre.textContent = s
+
 
     }
 }
@@ -198,7 +216,7 @@ function settings(event) {
                         board.set_state(x, y, element.textContent, "static")
                     }
                 }
-            } 
+            }
             list.style.display = ""
             arrow.classList.add("arrow-down")
             arrow.classList.remove("arrow-up")
@@ -244,32 +262,37 @@ window.put_number = function (number) {
 
     if (document.getElementById("pencil").classList.contains("selected")) {
         selected_tile.textContent = " "
+        let a = document.getElementById("^" + selected_tile.id)
 
-        let pre = document.getElementById("^" + selected_tile.id)
         if (number == " ") {
-            pre.textContent = "   \n   \n   ";
+            for (const child of a.children) {
+                child.innerHTML = ""
+            }
             for (let j = 0; j < 9; j++) {
                 board.set_anotation(x, y, j, false)
             }
             return
         }
 
-        let s = pre.textContent
-        let n = parseInt(number) - 1
-        let index = n + Math.floor(n / 3)
 
-        if (pre.textContent[index] == " ") {
-            pre.textContent = s.substring(0, index) + number + s.substring(index + 1);
+        let child = a.children[number - 1]
+        if (child.innerHTML == "") {
+            child.innerHTML = number
             board.set_anotation(x, y, number - 1, true)
         } else {
-            pre.textContent = s.substring(0, index) + " " + s.substring(index + 1);
+            child.innerHTML = ""
             board.set_anotation(x, y, number - 1, false)
         }
         board.set_state(x, y, 0, "normal")
 
     } else {
-        let pre = document.getElementById("^" + selected_tile.id)
-        pre.textContent = "   \n   \n   ";
+        let a = document.getElementById("^" + selected_tile.id)
+
+        for (const child of a.children) {
+            child.innerHTML = ""
+        }
+
+
         for (let j = 0; j < 9; j++) {
             board.set_anotation(x, y, j, false)
         }
@@ -277,10 +300,15 @@ window.put_number = function (number) {
         board.set_state(x, y, number, "normal")
         if (board.is_finished()) {
             requestIdleCallback(() => {
+                let audio = document.getElementById("victory_sound")
+                audio.volume = 0.9
+                audio.play();
+
+
                 selected_tile.classList.remove("selected")
                 selected_tile = null
                 settings({ srcElement: document.getElementById("check_errors"), stopPropagation: () => { } })
-                document.getElementById("modal").style.display = "block"
+                document.getElementById("modal").style.display = "flex"
             })
         }
 
@@ -289,3 +317,6 @@ window.put_number = function (number) {
     selected_tile.classList.remove("shake")
 }
 
+
+
+//----------------------------------------------------------------
