@@ -1,8 +1,7 @@
 # sudoku
 
 
+This link takes you to the Sudoku game.
+<br>
+<a href="https://gbhoyu.github.io/sudoku/pkg/"> Sudoku </a>
 
-<a href="https://gbhoyu.github.io/sudoku/pkg/"> Sudoku 2.0 </a>
-<br>
-<br>
-<a href="https://gbhoyu.github.io/sudoku/old_sudoku/"> Sudoku 1.0 </a>
